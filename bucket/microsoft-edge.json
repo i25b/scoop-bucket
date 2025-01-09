@@ -8,7 +8,6 @@
         "identifier": "Freeware",
         "url": "https://www.microsoft.com/en-us/servicesagreement/"
     },
-    "changelog": "https://docs.microsoft.com/en-us/deployedge/microsoft-edge-relnote-stable-channel",
     "architecture": {
         "64bit": {
             "url": "http://go.microsoft.com/fwlink/?LinkID=2093437#/setup.msi_",
@@ -19,7 +18,6 @@
             "hash": "0efe14d756b894e3b523ba4aefcc404895a7893a149e2f5ddeb642b1a9b490b3"
         }
     },
-    "pre_download": "Assert-Administrator",
     "installer": {
         "script": [
             "$programname = \"Microsoft Edge*\"",
