@@ -1,0 +1,54 @@
+{
+    "version": "2024-12",
+    "description": "Накопительное обновление для Windows 10 LTSB версии 21H2",
+    "homepage": "https://www.catalog.update.microsoft.com/Search.aspx?q=Cumulative%20Windows%2010%20LTSB%2021H2%20",
+    "license": "Proprietary",
+    "architecture": {
+        "64bit": {
+            "url": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/12/windows10.0-kb5048652-x64_279b3aca56a2aa72aa2d08ccc30fad69bd5a1e29.msu",
+            "hash": "78b639f3202e831343edc4e72a3785beb4035c7ccf27d29259c9ace8b7f44367"
+        },
+        "32bit": {
+            "url": "https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/secu/2024/12/windows10.0-kb5048652-x86_b2dc54a3d028f48d79f4395de9411f7db5f6eb0d.msu",
+            "hash": "35b8c0727398b7ca1c712290e9ce03cf01666a9f81bc8b390984cc084518fce1"
+        }
+    },
+    "checkver": {
+        "script": [
+            "$ProgressPreference = 'SilentlyContinue'",
+            "# Checking x64 version",
+            "#$manifestVersion=(Get-Content $dir\\windows10-cumulative-update*.json | ConvertFrom-JSON).version",
+            "(Invoke-WebRequest -URI \"https://www.catalog.update.microsoft.com/Search.aspx?q=Cumulative%20Windows%2010%20LTSB%2021H2%20\").Content -match '([\\d]{4}-[\\d]{2})?.*Windows 10.*21H2.*x64.*\\((?<kb>KB[\\d]{7})\\)[\\S\\s]+?(?=id=\")id=\"(?<id>[0-9a-f-]+)[\\S\\s]+?(?=[\\d]{2}/[\\d]{2}/[\\d]{4})(?<date>[\\d]{2}/[\\d]{2}/[\\d]{4})' | Out-Null",
+            "$updateID=$matches['id']",
+            "$updateKB=$matches['kb']",
+            "$matches['date'] -match '(?<m>[\\d]{2})/(?<d>[\\d]{2})/(?<y>[\\d]{4})' | Out-Null",
+            "$ver=\"$($matches['y'])-$($matches['m'])\"",
+            "$post=@{ size=0;updateID=$updateID;uidInfo=$updateID } | ConvertTo-Json -Compress",
+            "$body=@{ updateIDs=\"[$post]\" }",
+            "(Invoke-WebRequest -Uri 'https://www.catalog.update.microsoft.com/DownloadDialog.aspx' -Method Post -Body $body).Content -match 'http[s]?://[\\S]*download.windowsupdate.com/[\\S]*/windows10.0-kb[\\d]{7}-x64_(?<sha>[a-f0-9]+).msu' | Out-Null",
+            "$downloadUrl64=$matches[0]",
+            "$sha64=$matches['sha']",
+            "# Checking x32 version",
+            "(Invoke-WebRequest -URI \"https://www.catalog.update.microsoft.com/Search.aspx?q=Cumulative%20Windows%2010%20LTSB%2021H2%20\").Content -match '([\\d]{4}-[\\d]{2})?.*Windows 10.*21H2.*x86.*\\(KB[\\d]{7}\\)[\\S\\s]+?(?=id=\")id=\"(?<id>[0-9a-f-]+)[\\S\\s]+?(?=[\\d]{2}/[\\d]{2}/[\\d]{4})[\\d]{2}/[\\d]{2}/[\\d]{4}' | Out-Null",
+            "$updateID=$matches['id']",
+            "$post=@{ size=0;updateID=$updateID;uidInfo=$updateID } | ConvertTo-Json -Compress",
+            "$body=@{ updateIDs=\"[$post]\" }",
+            "(Invoke-WebRequest -Uri 'https://www.catalog.update.microsoft.com/DownloadDialog.aspx' -Method Post -Body $body).Content -match 'http[s]?://[\\S]*download.windowsupdate.com/[\\S]*/windows10.0-kb[\\d]{7}-x86_(?<sha>[a-f0-9]+).msu' | Out-Null",
+            "$downloadUrl32=$matches[0]",
+            "$sha32=$matches['sha']",
+            "$ProgressPreference = 'Continue'",
+            "\"$ver $downloadUrl64 $sha64 $downloadUrl32 $sha32\""
+        ],
+        "regex": "(?<version>[\\d-]+) (?<url64>[\\S]+) (?<sha64>[\\S]+) (?<url32>[\\S]+) (?<sha32>[\\S]+)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "$matchUrl64"
+            },
+            "32bit": {
+                "url": "$matchUrl32"
+            }
+        }
+    }
+}
