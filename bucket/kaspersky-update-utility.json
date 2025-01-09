@@ -27,6 +27,6 @@
         "regex": "(?<url>https:\/\/products.s.kaspersky-labs.com\/special\/kasp_updater3.0\/(?<version>[\\d.]+)\/russian-[\\d.]+\/[\\w\\d]+\/kuu[\\d.]+_ru.zip)"
     },
     "autoupdate": {
-        "url": "$matchUrl"
+        "url": "$matchUrl/"
     }
 }
