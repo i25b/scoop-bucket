@@ -1,0 +1,54 @@
+{
+    "version": "2024-11",
+    "description": "Накопительное обновление .Net Framework для Windows 10 LTSB версии 21H2",
+    "homepage": "https://www.catalog.update.microsoft.com/Search.aspx?q=Cumulative%20.NET%20Framework%20Windows%2010%2021H2%20LTSB%20",
+    "license": "Proprietary",
+    "architecture": {
+        "64bit": {
+            "url": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2024/09/windows10.0-kb5045933-x64-ndp481_9e50b0f56cc1fe0b2d5328a32194f7bcd2a3897e.msu",
+            "hash": "4f990192486022ad09fa2982d77e38f39bf860edee0f06ab2d67cf3f7174a249"
+        },
+        "32bit": {
+            "url": "https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2024/09/windows10.0-kb5045933-x86-ndp481_28b3ef63218649ad0fa2c2877d350495fab2bb37.msu",
+            "hash": "ddd95e838d195ea6f64a5f095f68dc81d277f6fd4837fe1b1d23286790faecf7"
+        }
+    },
+    "checkver": {
+        "script": [
+            "$ProgressPreference = 'SilentlyContinue'",
+            "# Checking x64 version",
+            "#$manifestVersion=(Get-Content $dir\\windows10-cumulative-update*.json | ConvertFrom-JSON).version",
+            "(Invoke-WebRequest -URI \"https://www.catalog.update.microsoft.com/Search.aspx?q=Cumulative%20.NET%20Framework%20Windows%2010%2021H2%20LTSB%20\").Content -match '([\\d]{4}-[\\d]{2})?.*\\.NET Framework 3\\.5[^\\d]+4\\.8\\.1.*Windows 10.*21H2.*x64.*\\((?<kb>KB[\\d]{7})\\)[\\S\\s]+?(?=id=\")id=\"(?<id>[0-9a-f-]+)[\\S\\s]+?(?=[\\d]{2}/[\\d]{2}/[\\d]{4})(?<date>[\\d]{2}/[\\d]{2}/[\\d]{4})' | Out-Null",
+            "$updateID=$matches['id']",
+            "$updateKB=$matches['kb']",
+            "$matches['date'] -match '(?<m>[\\d]{2})/(?<d>[\\d]{2})/(?<y>[\\d]{4})' | Out-Null",
+            "$ver=\"$($matches['y'])-$($matches['m'])\"",
+            "$post=@{ size=0;updateID=$updateID;uidInfo=$updateID } | ConvertTo-Json -Compress",
+            "$body=@{ updateIDs=\"[$post]\" }",
+            "(Invoke-WebRequest -Uri 'https://www.catalog.update.microsoft.com/DownloadDialog.aspx' -Method Post -Body $body).Content -match 'http[s]?://[\\S]*download.windowsupdate.com/[\\S]*/windows10.0-kb[\\d]{7}-x64-ndp481_(?<sha>[a-f0-9]+).msu' | Out-Null",
+            "$downloadUrl64=$matches[0]",
+            "$sha64=$matches['sha']",
+            "# Checking x32 version",
+            "(Invoke-WebRequest -URI \"https://www.catalog.update.microsoft.com/Search.aspx?q=Cumulative%20.NET%20Framework%20Windows%2010%2021H2%20LTSB%20\").Content -match '([\\d]{4}-[\\d]{2})?.*\\.NET Framework 3\\.5[^\\d]+4\\.8\\.1.*Windows 10.*21H2 \\((?<kb>KB[\\d]{7})\\)[\\S\\s]+?(?=id=\")id=\"(?<id>[0-9a-f-]+)[\\S\\s]+?(?=[\\d]{2}/[\\d]{2}/[\\d]{4})(?<date>[\\d]{2}/[\\d]{2}/[\\d]{4})' | Out-Null",
+            "$updateID=$matches['id']",
+            "$post=@{ size=0;updateID=$updateID;uidInfo=$updateID } | ConvertTo-Json -Compress",
+            "$body=@{ updateIDs=\"[$post]\" }",
+            "(Invoke-WebRequest -Uri 'https://www.catalog.update.microsoft.com/DownloadDialog.aspx' -Method Post -Body $body).Content -match 'http[s]?://[\\S]*download.windowsupdate.com/[\\S]*/windows10.0-kb[\\d]{7}-x86-ndp481_(?<sha>[a-f0-9]+).msu' | Out-Null",
+            "$downloadUrl32=$matches[0]",
+            "$sha32=$matches['sha']",
+            "$ProgressPreference = 'Continue'",
+            "\"$ver $downloadUrl64 $sha64 $downloadUrl32 $sha32\""
+        ],
+        "regex": "(?<version>[\\d-]+) (?<url64>[\\S]+) (?<sha64>[\\S]+) (?<url32>[\\S]+) (?<sha32>[\\S]+)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "$matchUrl64"
+            },
+            "32bit": {
+                "url": "$matchUrl32"
+            }
+        }
+    }
+}
