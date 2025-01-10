@@ -40,15 +40,5 @@
             "\"$ver $downloadUrl64 $sha64 $downloadUrl32 $sha32\""
         ],
         "regex": "(?<version>[\\d-]+) (?<url64>[\\S]+) (?<sha64>[\\S]+) (?<url32>[\\S]+) (?<sha32>[\\S]+)"
-    },
-    "autoupdate": {
-        "architecture": {
-            "64bit": {
-                "url": "$matchUrl64"
-            },
-            "32bit": {
-                "url": "$matchUrl32"
-            }
-        }
     }
 }
