@@ -11,8 +11,5 @@
     "checkver": {
         "url": "https://www.microsoft.com/en-us/edge/business/download?form=MA13FJ",
         "regex": "(?<version>[\\d]+\\.[\\d]+\\.[\\d]+\\.[\\d]+)\",\"(?<link>https:\/\/.*?microsoft.com\/filestreamingservice\/files\/[\\da-f-]+\/MicrosoftEdgePolicyTemplates.cab)"
-    },
-    "autoupdate": {
-        "url": "$matchLink#/templates.zip"
     }
 }
