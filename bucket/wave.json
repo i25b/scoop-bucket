@@ -1,5 +1,5 @@
 {
-	"##": "Source manifest https://github.com/dodorz/scoop/blob/master/Wave.json",
+    "##": "Source manifest https://github.com/dodorz/scoop/blob/master/Wave.json",
     "version": "0.11.0",
     "description": "cross-platform terminal for seamless workflows",
     "homepage": "https://www.waveterm.dev/",
