@@ -1,5 +1,5 @@
 {
-    "##": "Source manifest https://github.com/warexify/scoop-edk2-buildtools/blob/master/bucket/bootice.json"
+    "##": "Source manifest https://github.com/warexify/scoop-edk2-buildtools/blob/master/bucket/bootice.json",
     "version": "1.3.4.0",
     "description": "BOOTICE is a startup-related maintenance gadget that is primarily used to install, repair, back up, and restore MBR (Master Boot Record) or partition PBR (Partition Boot Record) of disks (mirrors), edit BCDs for Windows 7/8, and manage UEFI startup items. It also features disk sector editing, disk population, partition management, disk re-partitioning, and formatting.",
     "homepage": "http://bbs.ipauly.com/",
