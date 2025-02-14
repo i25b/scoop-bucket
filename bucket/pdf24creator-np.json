@@ -1,5 +1,5 @@
 {
-	"##": "Source manifest https://github.com/ScoopInstaller/Nonportable/blob/92041817a2c546b5987a3343f683ba4693a88252/bucket/pdf24-creator-np.json#L4",
+    "##": "Source manifest https://github.com/ScoopInstaller/Nonportable/blob/92041817a2c546b5987a3343f683ba4693a88252/bucket/pdf24-creator-np.json#L4",
     "version": "11.23.0",
     "homepage": "https://tools.pdf24.org/en/creator",
     "description": "Free and easy to use PDF software with several functions",
