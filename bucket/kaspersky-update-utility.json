@@ -19,6 +19,7 @@
         ]
     ],
     "persist": [
+        "Temp",
         "Updates",
         "updater.ini",
         "report.txt"
