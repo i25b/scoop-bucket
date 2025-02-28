@@ -1,13 +1,13 @@
 {
     "##": "Source manifest https://github.com/dodorz/scoop/blob/master/Wave.json",
-    "version": "0.11.0",
+    "version": "0.11.1",
     "description": "cross-platform terminal for seamless workflows",
     "homepage": "https://www.waveterm.dev/",
     "license": "Apache-2.0",
     "architecture": {
         "64bit": {
-            "url": "https://dl.waveterm.dev/releases-w2/Wave-win32-x64-0.11.0.msi",
-            "hash": "a5670172453641ab7b2ff0ee15a3c2ecea3650822e0f8f392c5649b941455f24"
+            "url": "https://dl.waveterm.dev/releases-w2/Wave-win32-x64-0.11.1.msi",
+            "hash": "727f14316aa6587233380d5ece84987c72445ecfda57d584e6653b706a32058a"
         }
     },
     "extract_dir": "waveterm",
