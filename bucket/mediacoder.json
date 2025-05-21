@@ -1,5 +1,5 @@
 {
-	"##": "Source manifest https://github.com/dodorz/scoop/blob/master/MediaCoder.json",
+    "##": "Source manifest https://github.com/dodorz/scoop/blob/master/MediaCoder.json",
     "homepage": "https://www.mediacoderhq.com/",
     "description": "A universal media transcoding software",
     "license": "unknown",
