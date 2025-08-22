@@ -7,6 +7,6 @@ Bucket for [Scoop](https://scoop.sh/), the Windows command-line installer.
 After manifests have been committed and pushed, run the following:
 
 ```
-scoop bucket add gdm257 https://github.com/gdm257/scoop-257
-scoop install gdm257/<manifestname>
+scoop bucket add i25b_scoop-bucket https://github.com/i25b/scoop-bucket
+scoop install i25b_scoop-bucket/<manifestname>
 ```
