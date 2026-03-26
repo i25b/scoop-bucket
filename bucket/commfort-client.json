@@ -7,7 +7,8 @@
     "hash": "02aa62b47d0a40c10380e505ee7b43f6e0c6585b2040374a25dc5a6898d26b20",
     "shortcuts": [
         [
-            "CommFort.exe"
+            "CommFort.exe",
+            "CommFort"
         ]
     ],
     "persist": [
