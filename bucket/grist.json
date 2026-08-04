@@ -1,13 +1,13 @@
 {
     "##": "Source manifest https://github.com/gdm257/scoop-257/blob/master/bucket/grist.json",
-    "version": "0.3.13",
+    "version": "0.3.14",
     "description": "Desktop Grist, packaged with Electron. Relational spreadsheet that combines the flexibility of a spreadsheet with the robustness of a database.",
     "homepage": "https://github.com/gristlabs/grist-desktop",
     "license": "Apache-2.0",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/gristlabs/grist-desktop/releases/download/v0.3.13/grist-desktop-0.3.13-win-x64.zip",
-            "hash": "c85f49625cfd355b9c445a77bc5e4df6a8a6ea2e4c54597ccca3faa322a4b1cc"
+            "url": "https://github.com/gristlabs/grist-desktop/releases/download/v0.3.14/grist-desktop-0.3.14-win-x64.zip",
+            "hash": "10f11c841be6bd6a25f60b416c876c984e1cb2811acc9697a81913ee37f8e7c7"
         }
     },
     "pre_install": [
